@@ -1,0 +1,214 @@
+/*Q01*/
+import React, { useState } from "react";
+
+const Q01 = () => {
+  const [number, setNumber] = useState(0);
+
+  function upCounter() {
+    setNumber(number + 1);
+  }
+
+  return (
+    <div>
+      <h1>{number}</h1>
+      <button onClick={upCounter}>클릭</button>
+    </div>
+  );
+};
+
+export default Q01;
+
+/*import React from "react";
+import Q01 from "./test/0319/Q01";
+
+function App() {
+  return <Q01 />;
+}
+
+export default App;
+*/
+
+------------------------------------------------------------------------------------------
+/*Q02*/
+import React, { useState } from "react";
+
+const Q02 = () => {
+  const [number, setNumber] = useState(0);
+
+  function upCounter() {
+    setNumber(number + 1);
+  }
+
+  function resetCounter() {
+    setNumber(0);
+  }
+
+  return (
+    <div>
+      <h1>{number}</h1>
+      <button onClick={upCounter} onMouseOut={resetCounter}>
+        클릭
+      </button>
+    </div>
+  );
+};
+
+export default Q02;
+
+/*import React from "react";
+import Q02 from "./test/0319/Q02";
+
+function App() {
+  return <Q02 />;
+}
+
+export default App;
+*/
+------------------------------------------------------------------------------------------
+/*Q03*/
+import React, { useState } from "react";
+
+const Q03 = () => {
+  const [message, setMessage] = useState("안녕하세요");
+
+  function login() {
+    setMessage("로그인되었습니다.");
+  }
+
+  function logout() {
+    setMessage("로그아웃되었습니다.");
+  }
+
+  return (
+    <div>
+      <h1>{message}</h1>
+      <button onClick={login}>로그인</button>
+      <button onClick={logout}>로그아웃</button>
+    </div>
+  );
+};
+
+export default Q03;
+
+/*import React from "react";
+import Q03 from "./test/0319/Q03";
+
+function App() {
+  return <Q03 />;
+}
+
+export default App;
+*/
+------------------------------------------------------------------------------------------
+/*Q04*/
+import React, { useState } from "react";
+
+const Q04 = () => {
+  const [color, setColor] = useState("black");
+
+  const fstyle = {
+    color: color,
+  };
+
+  return (
+    <div>
+      <h1 style={fstyle}>글자색 바꾸기</h1>
+      <button onClick={() => setColor("red")}>빨간색</button>
+      <button onClick={() => setColor("green")}>초록색</button>
+      <button onClick={() => setColor("blue")}>파란색</button>
+    </div>
+  );
+};
+
+export default Q04;
+
+/*import React from "react";
+import Q04 from "./test/0319/Q04";
+
+function App() {
+  return <Q04 />;
+}
+
+export default App;
+*/
+------------------------------------------------------------------------------------------
+/*UserID & UserPW & App.js*/
+
+import { useState } from "react";
+import UserId from "./test/0319/UserID";
+import UserPW from "./test/0319/UserPW";
+
+function App() {
+  const [id, setId] = useState("");
+  const [pw, setPw] = useState("");
+
+  function addIdHandler(id) {
+    setId(id);
+  }
+
+  function addPwHandler(pw) {
+    setPw(pw);
+  }
+
+  function printInfo() {
+    if (id === "sooa" && pw === "1234") {
+      alert("로그인 성공");
+    } else {
+      alert("로그인 실패");
+    }
+  }
+
+  return (
+    <>
+      <UserId onAddId={addIdHandler} />
+      <UserPW onAddPw={addPwHandler} />
+      <button onClick={printInfo}>Login</button>
+    </>
+  );
+}
+
+export default App;
+
+/*UserID.jsx*/
+
+import React from "react";
+
+function UserID(props) {
+  function updateValue(e) {
+    props.onAddId(e.target.value);
+  }
+
+  return (
+    <div>
+      <h1>
+        ID : <input type="text" onChange={updateValue} />
+      </h1>
+    </div>
+  );
+}
+
+export default UserID;
+
+
+
+/*UserPW.jsx*/
+
+import React from "react";
+
+function UserPW(props) {
+  function updateValue(e) {
+    props.onAddPw(e.target.value);
+  }
+
+  return (
+    <div>
+      <h1>
+        PW : <input type="password" onChange={updateValue} />
+      </h1>
+    </div>
+  );
+}
+
+export default UserPW;
+
+
