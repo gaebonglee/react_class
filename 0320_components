@@ -1,0 +1,342 @@
+import React, { useState } from "react";
+function AddName() {
+  const [names, setNames] = useState(["이가영", "리액트"]);
+  const [input, setInput] = useState("");
+  function InputChange(e) {
+    setInput(e.target.value);
+  }
+  function uploadInput() {
+    setNames((prevState) => [...prevState, input]);
+    //...prevState와 input순서 바꾸면 새로 입력한 값이 ...prevState 기준으로 위 또는 아래로 출력됨.
+  }
+  return (
+    <div>
+      <input type="text" onChange={InputChange} />
+      <button onClick={uploadInput}>추가</button>
+      <div>
+        {names.map((name, idx) => (
+          <p key={idx}>{name}</p>
+        ))}
+      </div>
+    </div>
+  );
+}
+export default AddName;
+
+/*import React from 'react';
+import AddName from './components/AddName';
+function App() {
+return (
+<>
+<AddName/>
+</>
+);
+};
+export default App;*/
+
+--------------------------------------------------------------------------------------
+import React, { useState } from "react";
+const ChangeFont = () => {
+  const [value, setValue] = useState("안녕하세요");
+  const [font, setFont] = useState("50px");
+  const fstyle = { fontSize: font };
+  return (
+    <div>
+      <div style={fstyle}>{value}</div>
+      <button
+        onClick={() => {
+          setFont("100px");
+        }}
+      >
+        글자크기변경
+      </button>
+    </div>
+  );
+};
+export default ChangeFont;
+
+/*import React from "react";
+import ChangeFont from "./components/0320/ChangeFont";
+function App() {
+  return <ChangeFont />;
+}
+export default App;
+*/
+
+--------------------------------------------------------------------------------------
+
+const CheckBox = (props) => {
+  const { cap, shose, bag } = props;
+  const [total, setTotal] = useState(0);
+  const changeHandler = (checkbox) => {
+    if (checkbox.checked) {
+      setTotal((prevState) => prevState + parseInt(checkbox.value));
+    } else {
+      setTotal((prevState) => prevState - parseInt(checkbox.value));
+    }
+  };
+  return (
+    <div>
+      <input
+        type="checkbox"
+        value={cap}
+        onChange={(e) => changeHandler(e.target)}
+      />
+      모자 1만원
+      <br />
+      <input
+        type="checkbox"
+        value={shose}
+        onChange={(e) => changeHandler(e.target)}
+      />
+      신발 3만원
+      <br />
+      <input
+        type="checkbox"
+        value={bag}
+        onChange={(e) => changeHandler(e.target)}
+      />
+      가방 8만원
+      <br />
+      <p>합계 : {total} </p>
+    </div>
+  );
+};
+
+/*import React from "react";
+import CheckBox from "./components/0320/CheckBox";
+function App() {
+  return (
+    <>
+      <CheckBox cap={10000} shose={30000} bag={80000} />
+    </>
+  );
+}
+
+export default App;*/
+
+--------------------------------------------------------------------------------------
+
+import React, { useState } from "react";
+function Counter() {
+  const [value, setValue] = useState(0);
+  function numUp() {
+    setValue(value + 1);
+  }
+  function numDown() {
+    setValue(value - 1);
+  }
+  return (
+    <div>
+      <p>
+        현재 카운터 값은 <b>{value}</b>입니다.
+      </p>
+      <button onClick={numUp}>+1</button>
+      <button onClick={numDown}>-1</button>
+    </div>
+  );
+}
+export default Counter;
+
+/*import React from "react";
+import Counter from "./components/0320/Counter";
+function App() {
+  return (
+    <>
+      <Counter />
+    </>
+  );
+}
+export default App;
+*/
+
+--------------------------------------------------------------------------------------
+
+import React, { useState } from "react";
+const EventOnChange = () => {
+  const [message, setMessage] = useState("onChange 이벤트");
+  return (
+    <div>
+      <h1>{message}</h1>
+      <input
+        type="text"
+        name="msg"
+        placeholder="내용을 입력하세요"
+        onChange={(e) => {
+          console.log(e.target.value);
+        }}
+      />
+    </div>
+  );
+};
+export default EventOnChange;
+
+/*import React from "react";
+import EventOnChange from "./components/0320/EventOnChange";
+function App() {
+  return <EventOnChange />;
+}
+export default App;
+*/ /*결과가 하나하나 다 console에 확인된다.*/
+
+--------------------------------------------------------------------------------------
+
+import React from "react";
+import image from "./images/me22.png"; /*해당 jsx상위폴더 안에 이미지 폴더가 있을 경우의 경로임*/
+const InsertImages = () => {
+  return (
+    <div>
+      <h1>이미지 추가하기</h1>
+      <img src={image} width="150px" height="150px" alt="파일없음" />
+      <br />
+      <img
+        src={require("./images/me22.png")}
+        width="150px"
+        height="150px"
+        alt="파일없음"
+      />
+    </div>
+  );
+};
+export default InsertImages;
+----------
+import React from "react";
+const InsertImages2 = () => {
+  const url =
+    "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png";
+  return (
+    <div>
+      <h1>외부 이미지 추가하기</h1>
+      <img src="/images/me22.png" alt="파일없음" />
+      <br />
+      <img src={url} width="150px" height="150px" alt="파일없음" />
+    </div>
+  );
+};
+export default InsertImages2;
+
+/*import React from "react";
+import InsertImage from "./components/0320/InsertImage";
+function App() {
+  return <InsertImage />;
+}
+export default App;
+*/
+
+--------------------------------------------------------------------------------------
+
+import React, { useState } from "react";
+const MultiInput = () => {
+  const [form, setForm] = useState({ username: "", message: "" });
+  function onChangeHandler(e) {
+    const nextForm = { ...form, [e.target.name]: e.target.value };
+    setForm(nextForm);
+  }
+  return (
+    <div>
+      <h1>사용자 이름 : {form.username}</h1>
+      <h1>내용 : {form.message}</h1>
+      <input
+        type="text"
+        name="username"
+        placeholder="사용자 이름"
+        onChange={onChangeHandler}
+      />
+      <input
+        type="text"
+        name="message"
+        placeholder="내용을 입력하세요"
+        onChange={onChangeHandler}
+      />
+    </div>
+  );
+};
+export default MultiInput;
+
+/*import React from "react";
+import TextArea from "./components/0320/TextArea";
+function App() {
+  return <TextArea />;
+}
+export default App;
+*/
+
+--------------------------------------------------------------------------------------
+
+import React, { useState } from "react";
+const NameForm = () => {
+  const [form, setForm] = useState("");
+  function updateValue(e) {
+    setForm(e.target.value);
+  }
+  function submitHandler(e) {
+    console.log("submit으로 받은 데이터 : ", form);
+    e.preventDefault();
+  }
+  return (
+    <div>
+      <form onSubmit={submitHandler}>
+        <h1>이름 : {form} </h1>
+        <input type="text" onChange={updateValue} />
+        <input type="submit" value="전송" />
+      </form>
+    </div>
+  );
+};
+export default NameForm;
+
+/*import React from "react";
+import<NameForm from "./components/0320/NameForm";
+function App() {
+  return <NameForm />;
+}
+
+export default App;
+*/
+
+--------------------------------------------------------------------------------------
+
+import React, { useState } from "react";
+const Select = () => {
+  const [select, setSelect] = useState("");
+  function updateValue(e) {
+    setSelect(e.target.value);
+  }
+  function submitHandler(e) {
+    console.log("submit으로 받은 데이터 : ", select);
+    e.preventDefault();
+  }
+  return (
+    <div>
+      <form onSubmit={submitHandler}>
+        <h1>선택한 과일 : {select} </h1>
+        <select value={select} onChange={updateValue}>
+          <option value="apple">사과</option>
+          <option value="mango">망고</option>
+          <option value="banana">바나나</option>
+          <option value="watermelon">수박</option>
+        </select>
+        <input type="submit" value="전송" />
+      </form>
+    </div>
+  );
+};
+export default Select;
+
+/*import React from "react";
+import Selete from "./components/0320/Selete";
+function App() {
+  return <Selete />;
+}
+export default App;*/ 
+
+/*function Select() {
+const [select, setSelect] = useState('mango');
+function updateValue(e){ setSelect(e.target.value); }
+function submitHandler(e){
+console.log("submit으로 받은 데이터 : ", select);
+e.preventDefault();
+} 을 입력하면 처음부터 특정 값이 선택되게 할 수 있음 */
+
+--------------------------------------------------------------------------------------
+
