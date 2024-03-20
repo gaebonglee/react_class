@@ -1,0 +1,268 @@
+import React, { useState } from "react";
+function EventClick() {
+  const [value, setValue] = useState("안녕하세요");
+  function printConsole() {
+    console.log(value);
+  }
+  return (
+    <div>
+      <h1>{value}</h1>
+      <button onClick={printConsole}>클릭</button>
+    </div>
+  );
+}
+export default EventClick;
+/* import React from "react";
+import EventClick from "./components/0319/EventClick";
+function App() {
+  return <EventClick />;
+}
+export default App;
+ */
+
+-------------------------------------------------------------------------------
+
+import React, { useState } from "react";
+function ChangeArray() {
+  const [value, setValue] = useState(["안녕", "하이"]);
+  function changeArr() {
+    const cValue = [...value];
+    cValue[1] = "Hello";
+    setValue(cValue);
+  }
+  return (
+    <div>
+      <h1>{value[0]}</h1>
+      <h1>{value[1]}</h1>
+      <button onClick={changeArr}>배열 값 변경</button>
+    </div>
+  );
+}
+export default ChangeArray;
+
+/*import React from "react";
+import ChangeArray from "./components/ChangeArray";
+function App() {
+  return <ChangeArray />;
+}
+export default App;*/
+
+-------------------------------------------------------------------------------
+
+import React from "react";
+function ChangePropsValue(props) {
+  let name = props.name;
+  function changeName() {
+    name = "React";
+    console.log(name);
+  }
+  return (
+    <div>
+      <h1>{props.name}</h1>
+      <button onClick={changeName}>클릭</button>
+    </div>
+  );
+}
+export default ChangePropsValue;
+
+/*import React from "react";
+import ChangePropsValue from "./components/0319/ChangePropsValue";
+function App() {
+  return (
+    <>
+      <ChangePropsValue name="YOUNG" />
+    </>
+  );
+}
+
+export default App;*/
+
+-------------------------------------------------------------------------------
+
+import React, { useState } from "react";
+function ChangeValue() {
+  const [value, setValue] = useState("안녕하세요");
+  function changeValue() {
+    setValue("반가워요");
+  }
+  return (
+    <div>
+      <h1>{value}</h1>
+      <button onClick={changeValue}>클릭</button>
+    </div>
+  );
+}
+export default ChangeValue;
+
+/*import React from "react";
+import ChangeValue from "./components/0319/ChangeValue";
+function App() {
+  return <ChangeValue />;
+}
+export default App;
+*/
+
+
+-------------------------------------------------------------------------------
+import React from "react";
+function ChildComponent(props) {
+  function updateValue(e) {
+    props.onAddData(e.target.value);
+  }
+  return (
+    <div>
+      <h3>
+        입력 : <input type="text" onChange={updateValue} />
+      </h3>
+    </div>
+  );
+}
+export default ChildComponent;
+
+/*import React, { useState } from "react";
+import ChildComponent from "./components/0319/ChildComponent";
+function App() {
+  const [value, setValue] = useState("");
+  function addDataHandler(data) {
+    setValue(data);
+  }
+  return (
+    <div>
+      <h3>ChildComponent로부터 전달받은 데이터 : {value} </h3>
+      <ChildComponent onAddData={addDataHandler} />
+    </div>
+  );
+}
+export default App;
+*/
+-------------------------------------------------------------------------------
+import React, { useState } from "react";
+function Hello() {
+  const [인사, 인사변경] = useState(["안녕하세요", "재미있는", "리액트"]);
+  return (
+    <div>
+      <h3>{인사[0]}</h3>
+      <h3>{인사[1]}</h3>
+      <h3>{인사[2]}</h3>
+    </div>
+  );
+}
+export default Hello;
+
+/*import React from "react";
+import Hello from "./components/0319/Hello";
+function App() {
+  return <Hello />;
+}
+export default App;
+*/ 
+-------------------------------------------------------------------------------
+
+import React from "react";
+function MovieComponent(props) {
+  const { title, open } = props;
+  return (
+    <div>
+      <h1>제목 : {title} </h1>
+      <h1>개봉 : {open} </h1>
+
+      <hr />
+    </div>
+  );
+}
+export default MovieComponent;
+
+/*import React from "react";
+import MovieComponent from "./components/0319/MovieComponent";
+function App() {
+  return (
+    <div>
+      <MovieComponent title="웡카" open="2024.01.31" />
+      <MovieComponent title="파묘" open="2024.02.22" />
+      <MovieComponent title="듄:파트2" open="2024.02.28" />
+    </div>
+  );
+}
+
+export default App;
+*/
+-------------------------------------------------------------------------------
+
+import React from "react";
+function PriceList(props) {
+  const { prices } = props;
+  return (
+    <div>
+      <h3>가격 목록</h3>
+      {prices}
+    </div>
+  );
+}
+export default PriceList;
+
+/*import React from "react";
+import PriceList from "./components/0319/PriceList";
+function App() {
+  const priceList = [1000, 2000, 3000, 4000];
+  const prices = priceList.map((price) => <div>가격 : {price}원</div>);
+  return (
+    <>
+      <PriceList prices={prices} />
+    </>
+  );
+}
+export default App;*/
+-------------------------------------------------------------------------------
+import React from "react";
+function Spread() {
+  const person1 = { name: "young" };
+  const person2 = { ...person1, age: 20 };
+  const person3 = { ...person2, region: "seoul" };
+  const person4 = { ...person3, region: "busan" };
+  return (
+    <div>
+      <h1>{JSON.stringify(person1)}</h1>
+      <h1>{JSON.stringify(person2)}</h1>
+      <h1>{JSON.stringify(person3)}</h1>
+      <h1>{JSON.stringify(person4)}</h1>
+    </div>
+  );
+}
+export default Spread;
+
+/*import React from "react";
+import Spread from "./components/0319/Spread";
+function App() {
+  return <Spread />;
+}
+export default App;
+*/
+-------------------------------------------------------------------------------
+import React from "react";
+function TodoTask(props) {
+  const { taskName } = props;
+  return <div>{taskName}</div>;
+}
+export default TodoTask;
+
+/*import React from "react";
+
+function App() {
+  const todoList = [
+    { taskName: "빨래하기", finished: false },
+    { taskName: "공부하기", finished: true },
+  ];
+  return (
+    <>
+      {todoList.map((todo) => (
+        <div key={todo.taskName}>{todo.taskName}</div>
+      ))}
+    </>
+  );
+}
+
+export default App;*/
+
+
+
+
