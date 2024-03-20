@@ -1,0 +1,144 @@
+import React from "react";
+function FirstProps(props) {
+  return (
+    <div>
+      <h1>
+        안녕하세요. 제 이름은 {props.name}입니다.
+        <br />
+        제가 좋아하는 색은 {props.color}입니다.
+      </h1>
+    </div>
+  );
+}
+export default FirstProps;
+
+/*props 값 간결하게 사용하기*/
+function FirstProps(props) {
+  const { name, color } = props;
+  return (
+    <div>
+      <h1>
+        안녕하세요. 제 이름은 {name}입니다.
+        <br />
+        제가 좋아하는 색은 {color}입니다.
+      </h1>
+    </div>
+  );
+}
+
+/*import React from "react";
+import FirstProps from "./components/0318/FirstProps";
+function App() {
+  return (
+    <div>
+      <FirstProps name="이가영" color="blue" />
+    </div>
+  );
+}
+
+export default App;
+*/
+--------------------------------------------------------------------------------------------------------------------
+/*불리언 프로퍼티 true는 프로퍼티의 이름만 선언함*/
+import React from "react";
+function BooleanComponent({ bored }) {
+  const message = bored ? "놀러 가자" : "하던 일 열심히 마무리하기";
+  return <div>{message}</div>;
+}
+export default BooleanComponent;
+
+/*import React from "react";
+import BooleanComponent from "./components/0318/BooleanComponent";
+function App() {
+  return (
+    <div>
+      <div>
+        <b>지루할 때 : </b>
+        <BooleanComponent bored />
+      </div>
+      <div>
+        <b>즐거울 때 : </b>
+        <BooleanComponent />
+      </div>
+    </div>
+  );
+}
+export default App;
+*/
+--------------------------------------------------------------------------------------------------------------------
+import React from "react";
+function DefaultProps({ name }) {
+  return <div>안녕하세요. 제 이름은 {name}입니다.</div>;
+}
+// 컴포넌트이름.defaultProps
+DefaultProps.defaultProps = {
+  name: "이름없음",
+};
+export default DefaultProps;
+
+/*import React from "react";
+import DefaultProps from "./components/0318/DefaultProps";
+function App() {
+  return (
+    <div>
+      <DefaultProps name="이가영" />
+      <DefaultProps />
+    </div>
+  );
+}
+
+export default App;*/
+
+--------------------------------------------------------------------------------------------------------------------
+import React from "react";
+import PropTypes from "prop-types";
+function PropTypesComponent({ name, favoriteNumber }) {
+  return (
+    <div>
+      안녕하세요. 제 이름은 {name}입니다.
+      <br />
+      제가 좋아하는 숫자는 {favoriteNumber}입니다.
+    </div>
+  );
+}
+PropTypesComponent.propTypes = {
+  name: PropTypes.string,
+  favoriteNumber: PropTypes.number.isRequired,
+};
+export default PropTypesComponent;
+
+/*import React from "react";
+import PropTypesComponent from "./components/0318/PropTypesComponent";
+function App() {
+  return <PropTypesComponent name="이가영" favoriteNumber={7} />;
+}
+export default App;
+*/
+--------------------------------------------------------------------------------------------------------------------
+import React from "react";
+function Wrapper({ children }) {
+  const style = {
+    border: "3px solid red",
+    padding: "20px",
+  };
+  return <div style={style}> {children}</div>;
+}
+export default Wrapper;
+
+/*import React from 'react';
+import Wrapper from './components/0318/Wrapper';
+import HeaderComponent from './HeaderComponent';
+import BodyComponent from './BodyComponent';
+import FooterComponent from './FooterComponent';
+function App(){
+return (
+<Wrapper>
+<HeaderComponent/>
+<BodyComponent/>
+<FooterComponent/>
+</Wrapper>
+);
+}
+export default App;*/
+
+
