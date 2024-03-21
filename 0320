@@ -1,0 +1,200 @@
+import React, { useState } from "react";
+const Q01 = () => {
+  const [message, setMessage] = useState({ title: "제목", color: "black" });
+  function changeMessage(cMessage) {
+    const newMessage = { ...message };
+    newMessage.title = cMessage;
+    newMessage.color = "red";
+    setMessage(newMessage);
+  }
+
+  function showMessage() {
+    alert(message.title);
+  }
+  return (
+    <div>
+      <h1 style={{ color: message.color }}>{message.title}</h1>
+      <hr />
+      <input
+        type="text"
+        name="msg"
+        placeholder="내용을 입력하세요"
+        onChange={(e) => {
+          changeMessage(e.target.value);
+        }}
+      />
+      <button
+        onClick={() => {
+          showMessage();
+        }}
+      >
+        클릭
+      </button>
+    </div>
+  );
+};
+
+export default Q01;
+
+/*import React from "react";
+import Q01 from "./test/0320/Q01";
+
+const App = () => {
+  return (
+    <div>
+      <Q01 />
+    </div>
+  );
+};
+
+export default App;*/ 
+
+------------------------------------------------------------------------
+
+import React, { useState } from "react";
+
+const Q02 = (props) => {
+  const { region } = props;
+  const [form, setForm] = useState("");
+
+  function updateValue(e) {
+    setForm(e.target.value);
+  }
+
+  function submitHandler(e) {
+    e.preventDefault();
+    alert(form);
+  }
+
+  return (
+    <div>
+      <h3>라디오 버튼의 value를 출력</h3>
+
+      <form onSubmit={submitHandler}>
+        {region.map((item) => (
+          <label key={item.eng}>
+            <input
+              type="radio"
+              name="city"
+              value={item.eng}
+              onChange={updateValue}
+            />
+            {item.region}
+          </label>
+        ))}
+        &nbsp; &nbsp;
+        <input type="submit" value="확인" />
+      </form>
+    </div>
+  );
+};
+
+export default Q02;
+
+/*import { useState } from "react";
+import Q02 from "./test/0320/Q02";
+
+function App() {
+  const regionList = [
+    {
+      region: "서울",
+      eng: "Seoul",
+    },
+    {
+      region: "부산",
+      eng: "Busan",
+    },
+    {
+      region: "제주",
+      eng: "Jeju",
+    },
+  ];
+  return <>{<Q02 region={regionList} />}</>;
+}
+
+export default App;
+*/ 
+
+------------------------------------------------------------------------
+
+import React, { useState } from "react";
+import "./Q03.css";
+
+const Q03 = (props) => {
+  const [number, setNumber] = useState(0);
+
+  function upCounter() {
+    setNumber(number + 1);
+    props.onCount();
+  }
+  return (
+    <div className="countDiv">
+      <h1>{number}</h1>
+      <button className="countBtn" onClick={upCounter}>
+        클릭
+      </button>
+    </div>
+  );
+};
+
+export default Q03;
+
+/*import { useState } from "react";
+import Q03 from "./test/0320/Q03";
+
+function App() {
+  const [count, setCount] = useState(0);
+
+  function onCountHandler() {
+    setCount((prev) => prev + 1);
+  }
+
+  return (
+    <>
+      <div className="title">
+        <h1>Total Count : {count}</h1>
+      </div>
+      <div className="container">
+        <Q03 onCount={onCountHandler} />
+        <Q03 onCount={onCountHandler} />
+      </div>
+    </>
+  );
+}
+
+export default App;*/
+
+/*css*/
+.title {
+  margin: auto;
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.countDiv {
+  width: 200px;
+  height: 200px;
+  background: rgba(126, 211, 240, 0.527);
+  text-align: center;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 6px 8px 16px 1px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 6px 8px 16px 1px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 6px 8px 16px 1px rgba(0, 0, 0, 0.75);
+}
+
+.countBtn {
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  border: none;
+  background: rgb(240, 145, 145);
+  width: 100px;
+  padding: 1.5rem;
+}
