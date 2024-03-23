@@ -1,0 +1,119 @@
+Sass 를 이용하기, 결과 화면에서 규칙을 찾아, mixin 을 구현 할 것
+
+*import React from "react";
+import "./SassComponent.scss";
+
+const SassComponent = () => {
+  return (
+    <div className="sassComponent">
+      <div className="box red" />
+      <div className="box orange" />
+      <div className="box yellow" />
+      <div className="box green" />
+      <div className="box blue" />
+      <div className="box navy" />
+      <div className="box purple" />
+    </div>
+  );
+};
+
+export default SassComponent;
+
+/*scss*/
+// 변수 선언
+$red: #ff0000;
+$orange: #ff7043;
+$yellow: #ffee58;
+$green: #4caf50;
+$blue: #1e88e5;
+$navy: #303f9f;
+$purple: #7b1fa2;
+
+// 믹스인 생성
+@mixin square($size) {
+  $calculated: 50px * $size;
+  width: $calculated;
+  height: $calculated;
+}
+
+.sassComponent {
+  display: flex;
+
+  .box {
+    &.red {
+      background: $red;
+      @include square(1);
+    }
+
+    &.orange {
+      background: $orange;
+      @include square(2);
+    }
+
+    &.yellow {
+      background: $yellow;
+      @include square(3);
+    }
+
+    &.green {
+      background: $green;
+      @include square(4);
+    }
+
+    &.blue {
+      background: $blue;
+      @include square(5);
+    }
+
+    &.navy {
+      background: $navy;
+      @include square(6);
+    }
+
+    &.purple {
+      background: $purple;
+      @include square(7);
+    }
+  }
+}
+
+--------------------------------------------------------------
+
+import React from "react";
+import styled from "styled-components";
+
+const StyledComponent = () => {
+  const Container = styled.div`
+    background: black;
+    padding: 1rem;
+    margin: 0 auto;
+
+    // 기본 너비 : 1024px
+    width: 1024px;
+
+    // 너비 768px 이하 : 100%
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+  `;
+
+  const Button = styled.button`
+    background: ${(props) => (props.main ? "blue" : "")};
+    color: ${(props) => (props.main ? "white" : "black")};
+    font-size: 1em;
+    margin: 1em;
+    padding: 0.25em 1em;
+    border: ${(props) => (props.main ? "3px solid yellow" : "")};
+    border-radius: 3px;
+  `;
+
+  return (
+    <Container>
+      <Button>버튼1</Button>
+      <Button main>버튼2</Button>
+    </Container>
+  );
+};
+
+export default StyledComponent;
+
