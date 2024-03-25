@@ -1,0 +1,160 @@
+import React, { useState } from "react";
+
+function Q01() {
+  const [foods, setFood] = useState(["초콜렛", "사탕"]);
+  const [input, setInput] = useState("");
+
+  function InputChange(e) {
+    setInput(e.target.value);
+  }
+  function uploadInput() {
+    setFood((prevState) => [input, ...prevState]);
+  }
+
+  return (
+    <div>
+      <input type="text" onChange={InputChange} />
+      <button onClick={uploadInput}>추가</button>
+      <ul>
+        {foods.map((food, idx) => {
+          return <li key={idx}>{food}</li>;
+        })}
+      </ul>
+    </div>
+  );
+}
+
+export default Q01;
+//리스트 표시되는 부분 확인해야함
+
+/*import React from "react";
+import Q01 from "./test/0325/Q01";
+function App() {
+  return (
+    <>
+      <Q01 />
+    </>
+  );
+}
+export default App;
+*/
+
+------------------------------------------------------------------------------------------
+
+import React, { useState, useEffect } from "react";
+
+function Q02() {
+  const [value, setValue] = useState(0);
+  const [input, setInput] = useState("");
+
+  useEffect(() => {
+    console.log("렌더링이 완료되었습니다.");
+  }, []);
+
+  useEffect(() => {
+    console.log("count 값이 변경되었습니다.");
+  }, [value]);
+
+  useEffect(() => {
+    console.log("text 값이 변경되었습니다.");
+  }, [input]);
+
+  function numUp() {
+    setValue(value + 1);
+  }
+
+  function handleInputChange(event) {
+    setInput(event.target.value);
+  }
+
+  return (
+    <div>
+      <h2>{value}</h2>
+      <button onClick={numUp}>+1</button>
+      <hr />
+      <input type="text" value={input} onChange={handleInputChange}></input>
+      <h1>{input}</h1>
+    </div>
+  );
+}
+
+export default Q02;
+
+/*import React from "react";
+import Q02 from "./test/0325/Q02";
+function App() {
+  return (
+    <>
+      <Q02 />
+    </>
+  );
+}
+export default App;*/  
+
+------------------------------------------------------------------------------------------
+
+import React, { useEffect, useState, useRef } from "react";
+const Q03 = () => {
+  const [count, setCount] = useState(0);
+  const renderCount = useRef(0);
+
+  useEffect(() => {
+    renderCount.current += 1;
+    console.log("랜더링 완료");
+  });
+  return (
+    <div>
+      <h1>Count : {count}</h1>
+      <h2>렌더링 횟수 : {renderCount.current}</h2> {/* 렌더링 횟수 출력 */}
+      <button onClick={() => setCount(count + 1)}>클릭</button>
+    </div>
+  );
+};
+
+export default Q03;
+
+/*import React from "react";
+import Q03 from "./test/0325/Q03";
+function App() {
+  return (
+    <>
+      <Q03 />
+    </>
+  );
+}
+export default App;*/
+
+------------------------------------------------------------------------------------------
+
+import React, { useRef } from "react";
+import { useState } from "react";
+
+const Q04 = () => {
+  const [currentText, setCurrntText] = useState("");
+  const inputRef = useRef();
+
+  function sendBtnHandler(e) {
+    setCurrentText(inputRef.current.value); // 렌더링 -> inputRef.current.value 화면 업데이트
+    console.log("렌더링 완료");
+  }
+  return (
+    <div>
+      <input type="text" ref={inputRef} />
+      <button onClick={sendBtnHandler}>전송</button>
+      <h3>전송된 단어 : {currentText}</h3>
+    </div>
+  );
+};
+
+export default Q04;
+
+/*import React from "react";
+import Q04 from "./test/0325/Q02";
+function App() {
+  return (
+    <>
+      <Q04 />
+    </>
+  );
+}
+export default App;*/
